@@ -1332,11 +1332,15 @@ textarea {
     left: 12px;
     right: 12px;
     bottom: calc(82px + env(safe-area-inset-bottom));
+    pointer-events: none;
   }
 
   .assistant-launcher {
-    width: 100%;
-    min-width: 0;
+    display: none;
+  }
+
+  .lead-assistant.open {
+    pointer-events: auto;
   }
 
   .assistant-panel {
@@ -1367,8 +1371,31 @@ textarea {
   }
 
   .mobile-cta button {
+    position: relative;
     background: var(--leaf);
     color: var(--green-950);
+  }
+
+  .assistant-mobile-trigger.has-nudge {
+    animation: assistantPulse 1.35s ease-in-out 3;
+  }
+
+  .assistant-mobile-trigger.has-nudge::after {
+    content: "1";
+    position: absolute;
+    top: -7px;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
+    border: 2px solid var(--cream);
+    border-radius: 50%;
+    color: #fff;
+    background: #e52d2d;
+    box-shadow: 0 12px 30px rgba(229, 45, 45, .42);
+    font-size: .78rem;
+    font-weight: 950;
   }
 
   .site-footer {

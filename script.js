@@ -131,6 +131,7 @@ modalClose?.addEventListener('click', () => modal.close());
 
 const assistant = document.querySelector('.lead-assistant');
 const assistantLauncher = document.querySelector('.assistant-launcher');
+const assistantMobileTrigger = document.querySelector('.assistant-mobile-trigger');
 const assistantClose = document.querySelector('.assistant-close');
 const assistantMessages = document.querySelector('.assistant-messages');
 const assistantOptions = document.querySelector('.assistant-options');
@@ -380,6 +381,7 @@ const nudgeAssistant = () => {
   if (!assistant || assistantHasNudged || assistant.classList.contains('open')) return;
   assistantHasNudged = true;
   assistant.classList.add('has-nudge');
+  assistantMobileTrigger?.classList.add('has-nudge');
 };
 
 if (assistant && assistantNudgeTrigger) {
@@ -402,13 +404,17 @@ if (assistant && assistantNudgeTrigger) {
   }
 }
 
-assistantLauncher?.addEventListener('click', () => {
+const openAssistant = () => {
   assistant?.classList.remove('has-nudge');
+  assistantMobileTrigger?.classList.remove('has-nudge');
   assistant?.classList.add('open');
-  assistantLauncher.setAttribute('aria-expanded', 'true');
+  assistantLauncher?.setAttribute('aria-expanded', 'true');
   assistant?.querySelector('.assistant-panel')?.setAttribute('aria-hidden', 'false');
   if (!assistantMessages?.children.length) askAssistantStep();
-});
+};
+
+assistantLauncher?.addEventListener('click', openAssistant);
+assistantMobileTrigger?.addEventListener('click', openAssistant);
 
 assistantClose?.addEventListener('click', () => {
   assistant?.classList.remove('open');
